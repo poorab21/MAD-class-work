@@ -1,12 +1,14 @@
 package com.mad.myapplication
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import androidx.databinding.DataBindingUtil
+import com.mad.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding : ActivityMainBinding;
     private lateinit var list_data : ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +26,6 @@ class MainActivity : AppCompatActivity() {
         list_data.add("Brody")
         list_data.add("Andy")
 
-
-
-        var listview = findViewById<ListView>(R.id.list) as ListView
-        listview.adapter = myAdapter(this,list_data)
-
-        listview.setOnItemClickListener{ parent, view, position, id ->
-            val i = Intent(this,Student::class.java)
-            i.putExtra("name",list_data[position])
-            startActivity(i)
-        }
+        findViewById<ListView>(R.id.list).adapter = myAdapter(this,list_data)
     }
 }
